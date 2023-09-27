@@ -10,8 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GoodsResponseDTO {
-    private Long id;
-    private String name;
-
-    private int amount;
+  private Long id;
+  private String name;
+  private int amount;
 }

@@ -15,10 +15,8 @@ public class Goods {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
   private Long id;
 
-  @Column(nullable = true)
   private String name;
 
   private int amount;

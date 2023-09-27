@@ -14,7 +14,6 @@ public class GoodsServiceImpl implements GoodsServices {
 
   public final GoodsRepository goodsRepository;
 
-
   public GoodsServiceImpl(GoodsRepository goodsRepository) {
     this.goodsRepository = goodsRepository;
   }
@@ -43,22 +42,6 @@ public class GoodsServiceImpl implements GoodsServices {
     goods.setAmount(amount);
     goodsRepository.save(goods);
     return new ResponseDTO("Amount was changed!");
-  }
-
-  @Override
-  public ResponseDTO plusOneGoodsById(Long id) {
-    Goods goods = goodsRepository.findById(id).get();
-    goods.setAmount(goods.getAmount() + 1);
-    goodsRepository.save(goods);
-    return new ResponseDTO("Goods was increased by 1");
-  }
-
-  @Override
-  public ResponseDTO minusOneGoodsById(Long id) {
-    Goods goods = goodsRepository.findById(id).get();
-    goods.setAmount(goods.getAmount() - 1);
-    goodsRepository.save(goods);
-    return new ResponseDTO("Goods was decreased by 1");
   }
 
   @Override
