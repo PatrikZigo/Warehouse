@@ -14,13 +14,16 @@ public class GoodsServiceImpl implements GoodsServices {
 
   public final GoodsRepository goodsRepository;
 
+
   public GoodsServiceImpl(GoodsRepository goodsRepository) {
     this.goodsRepository = goodsRepository;
   }
 
   @Override
   public ResponseDTO addGoods(GoodsRequestDTO goodsRequestDTO) {
-    Goods goods = new Goods(goodsRequestDTO.getName(), goodsRequestDTO.getAmount());
+    Goods goods = new Goods();
+    goods.setName(goodsRequestDTO.getName());
+    goods.setAmount(goodsRequestDTO.getAmount());
     goodsRepository.save(goods);
     return new ResponseDTO("Goods was added to warehouse!");
   }
