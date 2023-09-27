@@ -20,7 +20,8 @@ public class GoodsServiceImpl implements GoodsServices {
 
   @Override
   public ResponseDTO addGoods(GoodsRequestDTO goodsRequestDTO) {
-    goodsRepository.save(new Goods(goodsRequestDTO.getName(), goodsRequestDTO.getAmount()));
+    Goods goods = new Goods(goodsRequestDTO.getName(), goodsRequestDTO.getAmount());
+    goodsRepository.save(goods);
     return new ResponseDTO("Goods was added to warehouse!");
   }
 

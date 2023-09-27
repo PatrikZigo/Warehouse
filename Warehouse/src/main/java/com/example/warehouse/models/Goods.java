@@ -18,12 +18,10 @@ public class Goods {
   @Column(name = "id")
   private Long id;
 
-  @Column(nullable = false, unique = true, name = "name")
+  @Column(nullable = true)
   private String name;
 
-  @Column(nullable = false, name = "amount")
   private int amount;
-
 
   public Goods(String name, int amount){
     this.name = name;

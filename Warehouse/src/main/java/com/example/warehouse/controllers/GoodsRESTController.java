@@ -2,6 +2,7 @@ package com.example.warehouse.controllers;
 
 
 import com.example.warehouse.DTOs.GoodsRequestDTO;
+import com.example.warehouse.DTOs.ResponseDTO;
 import com.example.warehouse.services.GoodsServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class GoodsRESTController {
     }
 
     @PostMapping("/add-new-goods")
-    ResponseEntity<?> addNewGood(GoodsRequestDTO goodsRequestDTO){
+    ResponseEntity<ResponseDTO> addNewGood(GoodsRequestDTO goodsRequestDTO){
         return ResponseEntity.ok().body(goodsServices.addGoods(goodsRequestDTO));
     }
 
