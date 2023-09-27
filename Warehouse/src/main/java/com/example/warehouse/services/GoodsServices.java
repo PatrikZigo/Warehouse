@@ -1,14 +1,17 @@
 package com.example.warehouse.services;
 
-import com.example.warehouse.DTOs.RequestDTO;
+import com.example.warehouse.DTOs.GoodsRequestDTO;
+import com.example.warehouse.DTOs.GoodsResponseDTO;
 import com.example.warehouse.DTOs.ResponseDTO;
-import org.springframework.stereotype.Service;
+import com.example.warehouse.models.Goods;
+
+import java.util.List;
 
 
 public interface GoodsServices {
-  ResponseDTO addGoods(RequestDTO requestDTO);
+  ResponseDTO addGoods(GoodsRequestDTO goodsRequestDTO);
 
-  ResponseDTO modifyGoodsById(Long id, RequestDTO requestDTO);
+  ResponseDTO modifyGoodsById(Long id, GoodsRequestDTO goodsRequestDTO);
 
   ResponseDTO modifyAmountOfGoodsById(Long id, int amount);
 
@@ -17,4 +20,6 @@ public interface GoodsServices {
   ResponseDTO minusOneGoodsById(Long id);
 
   ResponseDTO removeGoodsById(Long id);
+
+  List<GoodsResponseDTO> getAllGoods();
 }

@@ -1,9 +1,12 @@
 package com.example.warehouse.services;
 
-import com.example.warehouse.DTOs.RequestDTO;
+import com.example.warehouse.DTOs.GoodsRequestDTO;
+import com.example.warehouse.DTOs.GoodsResponseDTO;
 import com.example.warehouse.DTOs.ResponseDTO;
 import com.example.warehouse.models.Goods;
 import com.example.warehouse.repositories.GoodsRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,16 +19,16 @@ public class GoodsServiceImpl implements GoodsServices {
   }
 
   @Override
-  public ResponseDTO addGoods(RequestDTO requestDTO) {
-    goodsRepository.save(new Goods(requestDTO.getName(), requestDTO.getAmount()));
+  public ResponseDTO addGoods(GoodsRequestDTO goodsRequestDTO) {
+    goodsRepository.save(new Goods(goodsRequestDTO.getName(), goodsRequestDTO.getAmount()));
     return new ResponseDTO("Goods was added to warehouse!");
   }
 
   @Override
-  public ResponseDTO modifyGoodsById(Long id, RequestDTO requestDTO) {
+  public ResponseDTO modifyGoodsById(Long id, GoodsRequestDTO goodsRequestDTO) {
     Goods goods = goodsRepository.findById(id).get();
-    goods.setName(requestDTO.getName());
-    goods.setAmount(requestDTO.getAmount());
+    goods.setName(goodsRequestDTO.getName());
+    goods.setAmount(goodsRequestDTO.getAmount());
     goodsRepository.save(goods);
     return new ResponseDTO("Goods was updated!");
   }
@@ -48,9 +51,9 @@ public class GoodsServiceImpl implements GoodsServices {
 
   @Override
   public ResponseDTO minusOneGoodsById(Long id) {
-      Goods goods = goodsRepository.findById(id).get();
-      goods.setAmount(goods.getAmount() - 1);
-      goodsRepository.save(goods);
+    Goods goods = goodsRepository.findById(id).get();
+    goods.setAmount(goods.getAmount() - 1);
+    goodsRepository.save(goods);
     return new ResponseDTO("Goods was decreased by 1");
   }
 
@@ -58,5 +61,17 @@ public class GoodsServiceImpl implements GoodsServices {
   public ResponseDTO removeGoodsById(Long id) {
     goodsRepository.delete(goodsRepository.findById(id).get());
     return new ResponseDTO("Goods was removed!");
+  }
+
+  @Override
+  public List<GoodsResponseDTO> getAllGoods() {
+    return goodsRepository.findAll().stream()
+        .map(
+            goods -> {
+              GoodsResponseDTO goodsResponseDTO =
+                  new GoodsResponseDTO(goods.getId(), goods.getName(), goods.getAmount());
+              return goodsResponseDTO;
+            })
+        .collect(Collectors.toList());
   }
 }
